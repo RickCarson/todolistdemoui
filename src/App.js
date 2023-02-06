@@ -1,5 +1,12 @@
-import React, { useEffect, useState } from "react"
 import './App.css';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+
+import React, { useEffect, useState } from "react"
+
+import Button from '@mui/material/Button';
 
 import { ApiGet, ApiPost, ApiPut, ToDoApiUrl, ToDoGruopsApiUrl } from './Services/FetchService';
 
@@ -45,7 +52,8 @@ function App() {
 
     const toDoToAdd = {
       "details": toDoDetails,
-      "toDoGroupId": pendingGroup.id
+      "toDoGroupId": pendingGroup.id,
+      "toDoGroup": pendingGroup
     }
 
     ApiPost(ToDoApiUrl, toDoToAdd);
@@ -86,9 +94,9 @@ function App() {
     <div className="App">
       <ToDoHeader />
       <AddNewToDo addNewToDoCommand={AddToDo} />
-      <ToDoFilter includeAll={true} toDoGroups={toDoGroups} selectedGroup={selectedGroup} handleChangeCommand={HandleGroupChange} />
+      <ToDoFilter title={"Filter ToDos"} minWidth={300} includeAll={true} toDoGroups={toDoGroups} selectedGroup={selectedGroup} handleChangeCommand={HandleGroupChange} />
       <ToDoList toDoList={toDos} toDoGroups={toDoGroups}  handleToDoChange={HandleToDoChange} />
-      <button onClick={GetToDoData}>Refresh</button>
+      <Button variant="contained" onClick={GetToDoData}>Refresh</Button>
     </div>
   );
 }

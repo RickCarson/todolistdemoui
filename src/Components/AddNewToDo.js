@@ -1,5 +1,9 @@
 import { useState } from "react"
 
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+
+
 export default function AddNewToDo({addNewToDoCommand}) {
     const [toDoDetails, setToDoDetails] = useState('');
 
@@ -13,12 +17,15 @@ export default function AddNewToDo({addNewToDoCommand}) {
     }
 
     return (
-        <div>
-            <input type="text" 
+        <div className="AddToDo">
+            <TextField id="newToDo" 
+                label="Add ToDo Here" 
+                variant="outlined"
+                size="small"
                 onChange={toDoDetailsChanges} 
                 value={toDoDetails}/>
 
-            <button onClick={addNew}>+ Add ToDo</button>
+            <Button variant="contained" onClick={addNew}>+ Add ToDo</Button>
         </div>
     );
 }
