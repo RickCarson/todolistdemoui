@@ -13,7 +13,8 @@ My technical design was to keep the JSX as simple as possible by splitting the a
 I separated out the API functionality into its own service so this could be reused and not mixed up in the code.  
 I chose this as the best approach as it's simple to implement, easy to understand and easy to maintain and expand.  
   
-Although I completed the user stories, I did not complete the 'nice to have' or TypeScript and Jest.  This was due to taking a bit longer to complete the React application with it not being my primary coding language.  If I had time, I had intended to come back and add those things, and also style it up with Material UI. I may still continue and complete those tasks in my own time for the experience.
+Although I completed the user stories, I did not complete the 'nice to have' or TypeScript and Jest.  This was due to taking a bit longer to complete the React application with it not being my primary coding language.  If I had time, I had intended to come back and add those things, and also style it up with Material UI. I may still continue and complete those tasks in my own time for the experience.  
+Given more time, I also would have implimented some of the additional feature I'd built into the API such as additional ToDo data and custom ToDoGroups
 
  ## 1 - Initial  set up
 Created React Application for UI
