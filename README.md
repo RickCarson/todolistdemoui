@@ -1,3 +1,8 @@
+
+### update v0.1.4 - Added MUI styling because it's VERY quick to create a good looking mature UX.  
+As the brief was to keep external packages to a minimum I have done this on a seperate branch and merged into master once complete.  
+To revert to the code without MUI please refer to Tagged version 0.1.3 
+
 # ToDoListDemoUI
 Simple RESTful API to manages todo list. ASP.NET Core Web API .NET 6.0  
 
