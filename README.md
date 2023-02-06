@@ -1,70 +1,47 @@
-# Getting Started with Create React App
+# ToDoListDemoUI
+Simple RESTful API to manages todo list. ASP.NET Core Web API .NET 6.0  
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+I probably spent about 2 hours in total working on this project as REACT is not my primary language.
+As REACT is not my primary language there may be some areas where I have not used the absolute best techniques, but hope I have shown an ability/willingness to get up to speed with this language and run with it while applying  good general coding practices.  
 
-## Available Scripts
+To build and run the solution, copy code locally, and from the route of the project folder run npm install to set up the project, and then npm run to run the project.  
+You may need to update the following URLs in the src/Services/FetchService.js file to join at the correct port for the API  
+const ToDoApiUrl = "https://localhost:7231/api/ToDo";  
+const ToDoGruopsApiUrl = "https://localhost:7231/api/ToDoGroups";  
 
-In the project directory, you can run:
+My technical design was to keep the JSX as simple as possible by splitting the application into logic bite sized components.  This makes the application easy to update and maintain and meant I could reuse components without duplicating code. 
+I separated out the API functionality into its own service so this could be reused and not mixed up in the code.  
+I chose this as the best approach as it's simple to implement, easy to understand and easy to maintain and expand.  
+  
+Although I completed the user stories, I did not complete the 'nice to have' or TypeScript and Jest.  This was due to taking a bit longer to complete the React application with it not being my primary coding language.  If I had time, I had intended to come back and add those things, and also style it up with Material UI. I may still continue and complete those tasks in my own time for the experience.
 
-### `npm start`
+ ## 1 - Initial  set up
+Created React Application for UI
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Added folders names Components and Services
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Added FetchService to handle generic API GET, POST, PUT and DELETE calls.
 
-### `npm test`
+Added Hook useEffect to App.js to load ToDo Data and ToDo Group Data
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Output data to screen with simple select drop down filter
 
-### `npm run build`
+## Tagged - Version 0.1.1 - User story 1
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Refactored react app into components
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Added AddNewToDo component.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Manually update todo list in UI while posting message back to API.
 
-### `npm run eject`
+## Tagged - Version 0.1.2 - User story 2
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Added todo list item component
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Added functionality to update ToDo groups and keep UI in correct state
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+##  Tagged - Version 0.1.3 - User story 3
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
