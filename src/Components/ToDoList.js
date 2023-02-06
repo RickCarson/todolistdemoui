@@ -1,10 +1,11 @@
+import ToDoListItem from "./ToDoListItem"
 
-export default function ToDoList ({toDoList}) {
+export default function ToDoList ({toDoList, toDoGroups, handleToDoChange}) {
     return (
         <div>
             {
                 toDoList.map(toDo => (
-                    <div key={toDo.id}>{toDo.details}</div>
+                    <ToDoListItem toDo={toDo} toDoGroups={toDoGroups} handleToDoChange={handleToDoChange} />
                 ))
             }
         </div>

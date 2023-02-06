@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import './App.css';
 
-import { ApiGet, ApiPost, ToDoApiUrl, ToDoGruopsApiUrl } from './Services/FetchService';
+import { ApiGet, ApiPost, ApiPut, ToDoApiUrl, ToDoGruopsApiUrl } from './Services/FetchService';
 
 import ToDoHeader from "./Components/ToDoHeader";
 import ToDoFilter from "./Components/ToDoFilter";
@@ -11,7 +11,7 @@ import AddNewToDo from "./Components/AddNewToDo";
 function App() {
   const [toDos, setToDos] = useState([]);
   const [toDoGroups, setToDoGroups] = useState([]);
-  const [selectedGroup, setSelectedGroup] = useState([0]);
+  const [selectedGroup, setSelectedGroup] = useState(0);
 
   useEffect(() => {
      GetToDoGroupsData();
@@ -40,8 +40,12 @@ function App() {
   const AddToDo = (toDoDetails) => {
     console.log(toDoDetails);
 
+    const pendingGroup = toDoGroups.find(group => group.name === "Pending");
+    console.log(pendingGroup);
+
     const toDoToAdd = {
-      "details": toDoDetails
+      "details": toDoDetails,
+      "toDoGroupId": pendingGroup.id
     }
 
     ApiPost(ToDoApiUrl, toDoToAdd);
@@ -49,19 +53,42 @@ function App() {
     // Also add manually as calling API to refresh data may return before
     // POST has completed the update
 
-    setToDos([...toDos, toDoToAdd]);
+    if (Number(selectedGroup) === pendingGroup.id || Number(selectedGroup) === 0)    
+      setToDos([...toDos, toDoToAdd]);
   }
 
   const HandleGroupChange = (event) => {
     setSelectedGroup(event.target.value);
   }
 
+  const HandleToDoChange = (event, toDo) => {
+    console.log('ToDo item changed' + event.target.value + ' - ' + toDo);
+
+    const newToDoList = [...toDos];
+    const index = newToDoList.indexOf(toDo);
+
+    const toDoGroup = toDoGroups.find(group => group.id === Number(event.target.value));
+    toDo.toDoGroupId = toDoGroup.id;
+    toDo.toDoGroup = toDoGroup;
+
+    ApiPut(ToDoApiUrl, toDo);
+
+    // Also update manually as calling API to refresh data may return before
+    // PUT has completed the update
+
+    if (index > -1) {
+      newToDoList.splice(index, 1);
+      setToDos(newToDoList);
+    }
+  }
+
   return (
     <div className="App">
       <ToDoHeader />
       <AddNewToDo addNewToDoCommand={AddToDo} />
-      <ToDoFilter toDoGroups={toDoGroups} selectedGroup={selectedGroup} handleChangeCommand={HandleGroupChange}  />
-      <ToDoList toDoList={toDos} />
+      <ToDoFilter includeAll={true} toDoGroups={toDoGroups} selectedGroup={selectedGroup} handleChangeCommand={HandleGroupChange} />
+      <ToDoList toDoList={toDos} toDoGroups={toDoGroups}  handleToDoChange={HandleToDoChange} />
+      <button onClick={GetToDoData}>Refresh</button>
     </div>
   );
 }
