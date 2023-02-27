@@ -6,7 +6,7 @@ import '@fontsource/roboto/700.css';
 
 import React, { useEffect, useState } from "react"
 
-import Button from '@mui/material/Button';
+import { Button, SelectChangeEvent } from '@mui/material';
 
 import { ApiGet, ApiPost, ApiPut, ToDoApiUrl, ToDoGruopsApiUrl } from './Services/FetchService';
 
@@ -15,10 +15,21 @@ import ToDoFilter from "./Components/ToDoFilter";
 import ToDoList from "./Components/ToDoList";
 import AddNewToDo from "./Components/AddNewToDo";
 
+interface ToDoGroup {
+  id: number;
+  name: string;
+};
+
+interface ToDo {
+  details: string;
+  toDoGroupId: number;
+  toDoGroup: ToDoGroup;
+};
+
 function App() {
-  const [toDos, setToDos] = useState([]);
-  const [toDoGroups, setToDoGroups] = useState([]);
-  const [selectedGroup, setSelectedGroup] = useState(0);
+  const [toDos, setToDos] = useState<ToDo[]>([]);
+  const [toDoGroups, setToDoGroups] = useState<ToDoGroup[]>([]);
+  const [selectedGroup, setSelectedGroup] = useState<number>(0);
 
   useEffect(() => {
      GetToDoGroupsData();
@@ -28,7 +39,7 @@ function App() {
     GetToDoData();
   },[selectedGroup]);
 
-  const GetToDoGroupsData = (groupName) => {
+  const GetToDoGroupsData = () => {
     ApiGet(ToDoGruopsApiUrl).then(
       result => setToDoGroups(result));
   }
@@ -44,13 +55,16 @@ function App() {
       result => setToDos(result));
   }
 
-  const AddToDo = (toDoDetails) => {
+  const AddToDo = (toDoDetails: string) => {
     console.log(toDoDetails);
 
-    const pendingGroup = toDoGroups.find(group => group.name === "Pending");
-    console.log(pendingGroup);
+    const tryGetGroup = toDoGroups.find(group => group.name === "Pending");
+    if (tryGetGroup === undefined)
+      throw new Error('Value not found');
 
-    const toDoToAdd = {
+    const pendingGroup: ToDoGroup = tryGetGroup;
+
+    const toDoToAdd: ToDo = {
       "details": toDoDetails,
       "toDoGroupId": pendingGroup.id,
       "toDoGroup": pendingGroup
@@ -65,17 +79,21 @@ function App() {
       setToDos([...toDos, toDoToAdd]);
   }
 
-  const HandleGroupChange = (event) => {
+  const HandleGroupChange = (event: SelectChangeEvent<any>) => {
     setSelectedGroup(event.target.value);
   }
 
-  const HandleToDoChange = (event, toDo) => {
+  const HandleToDoChange = (event: SelectChangeEvent<any>, toDo: ToDo) => {
     console.log('ToDo item changed' + event.target.value + ' - ' + toDo);
 
-    const newToDoList = [...toDos];
-    const index = newToDoList.indexOf(toDo);
+    const newToDoList: ToDo[] = [...toDos];
+    const index: number = newToDoList.indexOf(toDo);
 
-    const toDoGroup = toDoGroups.find(group => group.id === Number(event.target.value));
+    const tryGetGroup: ToDoGroup | undefined = toDoGroups.find(group => group.id === Number(event.target.value));
+    if (tryGetGroup === undefined)
+      throw new Error('Value not found');
+
+    const toDoGroup: ToDoGroup = tryGetGroup;
     toDo.toDoGroupId = toDoGroup.id;
     toDo.toDoGroup = toDoGroup;
 

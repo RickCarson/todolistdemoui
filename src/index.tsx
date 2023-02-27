@@ -4,7 +4,11 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const tryGetRoot: HTMLElement | null = document.getElementById('root');
+if (tryGetRoot === null)
+  throw new Error('Failed to find root');
+
+const root: ReactDOM.Root = ReactDOM.createRoot(tryGetRoot);
 root.render(
   <React.StrictMode>
     <App />
