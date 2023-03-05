@@ -1,3 +1,5 @@
+### update v0.1.5 - TypeScript
+Refactors source into TypeScript
 
 ### update v0.1.4 - Added MUI styling because it's VERY quick to create a good looking mature UX.  
 As the brief was to keep external packages to a minimum I have done this on a seperate branch and merged into master once complete.  
