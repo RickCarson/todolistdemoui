@@ -7,7 +7,7 @@ import Divider from '@mui/material/Divider';
 import ToDoListItem from "./ToDoListItem"
 import ToDoListProps from '../Interfaces/IToDoListProps';
 
-export default function ToDoList ({ToDoList, ToDoGroups, HandleToDoChange}: ToDoListProps) {
+export default function ToDoList ({ToDoList, ToDoGroups, HandleToDoChange}: ToDoListProps): JSX.Element {
     return (
         <span className="ToDoList">
             <List sx={{ width: '100%', maxWidth: 700, bgcolor: 'background.paper' }}>

@@ -17,25 +17,25 @@ import AddNewToDo from "./Components/AddNewToDo";
 import ToDo from './Interfaces/IToDo';
 import ToDoGroup from './Interfaces/IToDoGroup';
 
-function App() {
+function App(): JSX.Element {
   const [toDos, setToDos] = useState<ToDo[]>([]);
   const [toDoGroups, setToDoGroups] = useState<ToDoGroup[]>([]);
   const [selectedGroup, setSelectedGroup] = useState<number>(0);
 
-  useEffect(() => {
+  useEffect((): void => {
      GetToDoGroupsData();
   },[]);
 
-  useEffect(() => {
+  useEffect((): void => {
     GetToDoData();
   },[selectedGroup]);
 
-  const GetToDoGroupsData = () => {
+  const GetToDoGroupsData = (): void => {
     ApiGet(ToDoGruopsApiUrl).then(
       result => setToDoGroups(result));
   }
 
-  const GetToDoData = () => {
+  const GetToDoData = (): void => {
     if (selectedGroup > 0){
       ApiGet(ToDoApiUrl+'?toDoGroupId='+selectedGroup).then(
         result => setToDos(result));
@@ -46,7 +46,7 @@ function App() {
       result => setToDos(result));
   }
 
-  const AddToDo = (toDoDetails: string) => {
+  const AddToDo = (toDoDetails: string): void => {
     console.log(toDoDetails);
 
     const tryGetGroup = toDoGroups.find(group => group.name === "Pending");
@@ -71,11 +71,11 @@ function App() {
       setToDos([...toDos, toDoToAdd]);
   }
 
-  const HandleGroupChange = (event: SelectChangeEvent) => {
+  const HandleGroupChange = (event: SelectChangeEvent): void => {
     setSelectedGroup(Number(event.target.value));
   }
 
-  const HandleToDoChange = (event: SelectChangeEvent<any>, toDo: ToDo) => {
+  const HandleToDoChange = (event: SelectChangeEvent<any>, toDo: ToDo): void => {
     console.log('ToDo item changed' + event.target.value + ' - ' + toDo);
 
     const newToDoList: ToDo[] = [...toDos];

@@ -6,7 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import ToDoFilterProps from '../Interfaces/IToDoFilterProps';
 
-export default function ToDoFilter({Title, MinWidth, IncludeAll, ToDoGroups, SelectedGroup, HandleChangeCommand}: ToDoFilterProps) {
+export default function ToDoFilter({Title, MinWidth, IncludeAll, ToDoGroups, SelectedGroup, HandleChangeCommand}: ToDoFilterProps): JSX.Element {
     return (
         <span className='ToDoFilter'>
         <Box style={{display: 'inline-block'}} sx={{ minWidth: {MinWidth} }}>

@@ -6,7 +6,7 @@ import ToDoFilter from "./ToDoFilter"
 import React from 'react';
 import ToDoListItemProps from '../Interfaces/IToDoListItemProps';
 
-export default function ToDoListItem({ToDo, ToDoGroups, HandleToDoChange}: ToDoListItemProps) {
+export default function ToDoListItem({ToDo, ToDoGroups, HandleToDoChange}: ToDoListItemProps): JSX.Element {
     return (
         <span className="ToDoListItem" 
             key={ToDo.id}>
