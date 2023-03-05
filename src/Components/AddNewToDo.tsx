@@ -1,18 +1,18 @@
-import { useState } from "react"
+import React, { useState } from "react"
 
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import AddNewToDoProps from "../Interfaces/IAddNewToDoProps";
 
+export default function AddNewToDo({AddNewHandler}: AddNewToDoProps) {
+    const [toDoDetails, setToDoDetails] = useState<string>('');
 
-export default function AddNewToDo({addNewToDoCommand}) {
-    const [toDoDetails, setToDoDetails] = useState('');
-
-    const toDoDetailsChanges = (event) => {
+    const toDoDetailsChanges = (event: React.ChangeEvent<HTMLInputElement>) => {
         setToDoDetails(event.target.value);
     }
 
     const addNew = () => {
-        addNewToDoCommand(toDoDetails);
+        AddNewHandler(toDoDetails);
         setToDoDetails('');
     }
 
@@ -22,7 +22,9 @@ export default function AddNewToDo({addNewToDoCommand}) {
                 label="Add ToDo Here" 
                 variant="outlined"
                 size="small"
-                onChange={toDoDetailsChanges} 
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                    toDoDetailsChanges(event);
+                  }}
                 value={toDoDetails}/>
 
             <Button variant="contained" onClick={addNew}>+ Add ToDo</Button>

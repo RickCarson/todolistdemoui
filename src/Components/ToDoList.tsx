@@ -5,17 +5,18 @@ import ListItem from '@mui/material/ListItem';
 import Divider from '@mui/material/Divider';
 
 import ToDoListItem from "./ToDoListItem"
+import ToDoListProps from '../Interfaces/IToDoListProps';
 
-export default function ToDoList ({toDoList, toDoGroups, handleToDoChange}) {
+export default function ToDoList ({ToDoList, ToDoGroups, HandleToDoChange}: ToDoListProps) {
     return (
         <span className="ToDoList">
             <List sx={{ width: '100%', maxWidth: 700, bgcolor: 'background.paper' }}>
                 {
-                    toDoList.map(toDo => (
+                    ToDoList.map(toDo => (
                         <>
-                        <ListItem style={{display: 'inline-block'}} alignItems="flex-start">
+                        <ListItem key={toDo.id} style={{display: 'inline-block'}} alignItems="flex-start">
 
-                            <ToDoListItem toDo={toDo} toDoGroups={toDoGroups} handleToDoChange={handleToDoChange} />
+                            <ToDoListItem ToDo={toDo} ToDoGroups={ToDoGroups} HandleToDoChange={HandleToDoChange} />
                         </ListItem>
                         <Divider variant="inset" component="li" />
                         </>

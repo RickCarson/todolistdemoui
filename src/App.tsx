@@ -14,17 +14,8 @@ import ToDoHeader from "./Components/ToDoHeader";
 import ToDoFilter from "./Components/ToDoFilter";
 import ToDoList from "./Components/ToDoList";
 import AddNewToDo from "./Components/AddNewToDo";
-
-interface ToDoGroup {
-  id: number;
-  name: string;
-};
-
-interface ToDo {
-  details: string;
-  toDoGroupId: number;
-  toDoGroup: ToDoGroup;
-};
+import ToDo from './Interfaces/IToDo';
+import ToDoGroup from './Interfaces/IToDoGroup';
 
 function App() {
   const [toDos, setToDos] = useState<ToDo[]>([]);
@@ -65,6 +56,7 @@ function App() {
     const pendingGroup: ToDoGroup = tryGetGroup;
 
     const toDoToAdd: ToDo = {
+      "id": toDos.length,
       "details": toDoDetails,
       "toDoGroupId": pendingGroup.id,
       "toDoGroup": pendingGroup
@@ -79,8 +71,8 @@ function App() {
       setToDos([...toDos, toDoToAdd]);
   }
 
-  const HandleGroupChange = (event: SelectChangeEvent<any>) => {
-    setSelectedGroup(event.target.value);
+  const HandleGroupChange = (event: SelectChangeEvent) => {
+    setSelectedGroup(Number(event.target.value));
   }
 
   const HandleToDoChange = (event: SelectChangeEvent<any>, toDo: ToDo) => {
@@ -111,9 +103,9 @@ function App() {
   return (
     <div className="App">
       <ToDoHeader />
-      <AddNewToDo addNewToDoCommand={AddToDo} />
-      <ToDoFilter title={"Filter ToDos"} minWidth={300} includeAll={true} toDoGroups={toDoGroups} selectedGroup={selectedGroup} handleChangeCommand={HandleGroupChange} />
-      <ToDoList toDoList={toDos} toDoGroups={toDoGroups}  handleToDoChange={HandleToDoChange} />
+      <AddNewToDo AddNewHandler={AddToDo} />
+      <ToDoFilter Title={"Filter ToDos"} MinWidth={300} IncludeAll={true} ToDoGroups={toDoGroups} SelectedGroup={selectedGroup} HandleChangeCommand={HandleGroupChange} />
+      <ToDoList ToDoList={toDos} ToDoGroups={toDoGroups}  HandleToDoChange={HandleToDoChange} />
       <Button variant="contained" onClick={GetToDoData}>Refresh</Button>
     </div>
   );
